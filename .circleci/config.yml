@@ -21,13 +21,16 @@ jobs:
         
           docker build --platform=linux/amd64 -t ${TAG}-amd64 ./amd64
           docker push ${TAG}-amd64
+          
           docker build --platform=linux/arm64/v8 -t ${TAG}-arm64 ./arm64
           docker push ${TAG}-arm64
           
-          docker manifest create $TAG --amend ${TAG}-amd64 --amend ${TAG}-arm64
-          docker manifest create $TAG_LATEST --amend ${TAG}-amd64 --amend ${TAG}-arm64
-          
+          docker manifest create $TAG ${TAG}-amd64 ${TAG}-arm64
+          docker manifest annotate $TAG ${TAG}-arm64 --variant v8
           docker manifest push $TAG
+          
+          docker manifest create $TAG_LATEST ${TAG}-amd64 ${TAG}-arm64
+          docker manifest annotate $TAG_LATEST ${TAG}-arm64 --variant v8
           docker manifest push $TAG_LATEST
 
 workflows:
