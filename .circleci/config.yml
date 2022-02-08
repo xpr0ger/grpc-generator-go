@@ -1,9 +1,6 @@
 version: 2.1
 jobs:
   build:
-    filters:
-      tags:
-        only: /.*/
     docker:
       - image: cimg/go:1.17
         auth:
@@ -31,4 +28,13 @@ jobs:
           
           docker manifest push $TAG
           docker manifest push $TAG_LATEST
+
+workflows:
+  version: 2
+  build_tag:
+    jobs:
+    - build:
+      filters:
+        tag:
+          only: /.*/
           
