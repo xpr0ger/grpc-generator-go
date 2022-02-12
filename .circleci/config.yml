@@ -18,7 +18,7 @@ commands:
 jobs:
   build_arm64:
     machine:
-      - image: docker:20.10
+      image: docker:20.10
     resource_class: arm.medium
     steps:
       - setup_remote_docker:
