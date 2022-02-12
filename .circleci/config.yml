@@ -22,6 +22,7 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
+          version: 20.10.11
       - checkout
       - build-image-and-push:
           tag: "${DOCKERHUB_USER}/grpc-generator-go:${CIRCLE_TAG}"
@@ -35,6 +36,7 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
+          version: 20.10.11
       - checkout
       - build-image-and-push:
           tag: "${DOCKERHUB_USER}/grpc-generator-go:${CIRCLE_TAG}"
@@ -48,6 +50,7 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
+          version: 20.10.11
       - run: |
           export TAG="${DOCKERHUB_USER}/grpc-generator-go:${CIRCLE_TAG}"
           export TAG_LATEST="${DOCKERHUB_USER}/grpc-generator-go:latest"
